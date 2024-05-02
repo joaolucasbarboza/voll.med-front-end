@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 import { ButtonLoading } from "./button-loading";
 import { Button } from "./ui/button";
 import { useState } from "react";
@@ -16,9 +15,10 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useSessionUserContext } from "@/contexts/auth";
 
 const LoginSchema = z.object({
-  email: z
+  login: z
     .string()
     .min(1, { message: "Este campo deve ser preenchido." })
     .email("Este não é um e-mail válido."),
@@ -27,18 +27,20 @@ const LoginSchema = z.object({
 });
 
 export function LoginInputs() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "",
+      login: "",
       password: "",
     },
   });
 
+  const context = useSessionUserContext();
+
   function onSubmit(values: z.infer<typeof LoginSchema>) {
-    console.log(values);
+    context.login(values.login, values.password);
   }
 
   return (
@@ -58,7 +60,7 @@ export function LoginInputs() {
             >
               <FormField
                 control={form.control}
-                name="email"
+                name="login"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>
@@ -98,14 +100,12 @@ export function LoginInputs() {
                   text="Entrando"
                 />
               ) : (
-                <Link to={{ pathname: "/dashboard" }}>
-                  <Button
-                    type="submit"
-                    className="w-full mt-6"
-                  >
-                    Entrar
-                  </Button>
-                </Link>
+                <Button
+                  type="submit"
+                  className="w-full mt-6"
+                >
+                  Entrar
+                </Button>
               )}
             </form>
           </Form>

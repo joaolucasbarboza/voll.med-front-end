@@ -11,6 +11,7 @@ import { Medicines } from "./pages/Medicines/index.tsx";
 import { Patients } from "./pages/Pacients/index.tsx";
 import { Login } from "./pages/Login/index.tsx";
 import { Register } from "./pages/Register/index.tsx";
+import { SessionUserProvider } from "./contexts/auth.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       defaultTheme="dark"
       storageKey="vite-ui-theme"
     >
-      <RouterProvider router={router} />
+      <SessionUserProvider>
+        <RouterProvider router={router} />
+      </SessionUserProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
