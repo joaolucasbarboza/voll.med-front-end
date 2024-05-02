@@ -4,11 +4,13 @@ import "./index.css";
 import { ThemeProvider } from "./components/theme-provider.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { NavBar } from "./components/navBar.tsx";
-import { ErrorPage } from "@/pages/error-page.tsx";
-import { Dashboard } from "./pages/dashboard.tsx";
-import { Doctors } from "./pages/doctors.tsx";
-import { Medicines } from "./pages/medicines.tsx";
-import { Patients } from "./pages/patients.tsx";
+import { ErrorPage } from "@/pages/ErrorPage/index.tsx";
+import { Dashboard } from "./pages/Dashboard/index.tsx";
+import { Doctors } from "./pages/Doctors/index.tsx";
+import { Medicines } from "./pages/Medicines/index.tsx";
+import { Patients } from "./pages/Pacients/index.tsx";
+import { Login } from "./pages/Login/index.tsx";
+import { Register } from "./pages/Register/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,22 +19,32 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true,
         path: "dashboard",
         element: <Dashboard />,
       },
       {
         path: "doctors",
-        element: <Doctors />
+        element: <Doctors />,
       },
       {
         path: "medicines",
-        element: <Medicines />
+        element: <Medicines />,
       },
       {
         path: "patients",
-        element: <Patients />
-      }
+        element: <Patients />,
+      },
     ],
+  },
+
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
   },
 ]);
 
