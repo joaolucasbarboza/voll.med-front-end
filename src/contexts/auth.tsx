@@ -1,4 +1,5 @@
 import { api } from "@/services/api";
+import { StorageToken } from "@/utils/storage-token";
 import { createContext, useContext } from "react";
 
 interface TypeLogin {
@@ -30,7 +31,9 @@ export const SessionUserProvider = ({ children }: TypeLogin) => {
         login,
         senha
       })
-      .then((response) => console.log(response))
+      .then(response => {
+        StorageToken.defineTokens(response.data.token)
+      })
       .catch((error) => console.error(error));
   };
 
