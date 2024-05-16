@@ -6,12 +6,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { NavBar } from "./components/navBar.tsx";
 import { ErrorPage } from "@/pages/ErrorPage/index.tsx";
 import { Dashboard } from "./pages/Dashboard/index.tsx";
-import { Doctors } from "./pages/Doctors/index.tsx";
-import { Medicines } from "./pages/Medicines/index.tsx";
+import Doctors from "./pages/Doctors/index.tsx";
+import Medicines from "./pages/Medicines/index.tsx";
 import { Patients } from "./pages/Pacients/index.tsx";
 import { Login } from "./pages/Login/index.tsx";
 import { Register } from "./pages/Register/index.tsx";
-import { SessionUserProvider } from "./contexts/auth.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +39,7 @@ const router = createBrowserRouter([
   },
 
   {
+    index: true,
     path: "login",
     element: <Login />,
   },
@@ -55,9 +55,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       defaultTheme="dark"
       storageKey="vite-ui-theme"
     >
-      <SessionUserProvider>
         <RouterProvider router={router} />
-      </SessionUserProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
