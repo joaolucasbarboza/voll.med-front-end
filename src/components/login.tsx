@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 import { ButtonLoading } from "./button-loading";
 import { Button } from "./ui/button";
@@ -15,7 +15,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useSessionUserContext } from "@/contexts/auth";
+// import { useSessionUserContext } from "@/contexts/auth";
+import { api } from "@/services/api";
 
 const LoginSchema = z.object({
   login: z
@@ -23,7 +24,7 @@ const LoginSchema = z.object({
     .min(1, { message: "Este campo deve ser preenchido." })
     .email("Este não é um e-mail válido."),
 
-  password: z.string(),
+  senha: z.string(),
 });
 
 export function LoginInputs() {
@@ -33,14 +34,28 @@ export function LoginInputs() {
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       login: "",
-      password: "",
+      senha: "",
     },
   });
 
-  const context = useSessionUserContext();
+  const navigate = useNavigate();
 
   function onSubmit(values: z.infer<typeof LoginSchema>) {
-    context.login(values.login, values.password);
+    console.log(values);
+    
+    api.post("/login", values)
+    .then(response => {
+
+      const token = response.data.token;
+
+      console.log(token);
+      
+
+      localStorage.setItem('token', token)
+
+      navigate("/dashboard")
+    })
+    .catch((error) => console.error(error));
   }
 
   return (
@@ -78,7 +93,7 @@ export function LoginInputs() {
 
               <FormField
                 control={form.control}
-                name="password"
+                name="senha"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Senha</FormLabel>
