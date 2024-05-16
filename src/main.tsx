@@ -8,7 +8,7 @@ import { ErrorPage } from "@/pages/ErrorPage/index.tsx";
 import { Dashboard } from "./pages/Dashboard/index.tsx";
 import Doctors from "./pages/Doctors/index.tsx";
 import Medicines from "./pages/Medicines/index.tsx";
-import { Patients } from "./pages/Pacients/index.tsx";
+import { Patients } from "./pages/Patients/index.tsx";
 import { Login } from "./pages/Login/index.tsx";
 import { Register } from "./pages/Register/index.tsx";
 
