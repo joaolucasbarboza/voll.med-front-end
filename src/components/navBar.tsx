@@ -15,8 +15,6 @@ import {
 import {
   Package2,
   Home,
-  ShoppingCart,
-  Package,
   Users2,
   LineChart,
   Settings,
@@ -182,32 +180,32 @@ export function NavBar() {
                     Dashboard
                   </Link>
                   <Link
-                    to={{ pathname: "/" }}
+                    to={{ pathname: "/medicines" }}
                     className="flex items-center gap-4 px-2.5 text-foreground"
                   >
-                    <ShoppingCart className="h-5 w-5" />
-                    Orders
+                    <Syringe className="h-5 w-5" />
+                    Medicamentos
                   </Link>
                   <Link
-                    to={{ pathname: "/" }}
+                    to={{ pathname: "/doctors" }}
                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                   >
-                    <Package className="h-5 w-5" />
-                    Products
+                    <Stethoscope className="h-5 w-5" />
+                    Médicos
                   </Link>
                   <Link
-                    to={{ pathname: "/" }}
+                    to={{ pathname: "/patients" }}
                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                   >
                     <Users2 className="h-5 w-5" />
-                    Customers
+                    Pacientes
                   </Link>
                   <Link
                     to={{ pathname: "/" }}
                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                   >
                     <LineChart className="h-5 w-5" />
-                    Settings
+                    Relatórios
                   </Link>
                 </nav>
               </SheetContent>
