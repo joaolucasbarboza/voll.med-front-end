@@ -1,142 +1,81 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "./ui/form";
-import { useNewQuery } from "@/hooks/useNewQuery";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Label } from "./ui/label";
 import { DoctorType, useQueryDoctors } from "@/hooks/useQueryDoctors";
-import { Skeleton } from "./ui/skeleton";
-import { PatientsType, useQueryPatients } from "@/hooks/useQueryPatients";
+import { AvatarAPI } from "./avatar";
 
 export function NewQuery() {
-  const { form, onSubmit } = useNewQuery();
   const { dataDoctors, isLoadingDoctors } = useQueryDoctors();
-  const { dataPatients, isLoadingPatients } = useQueryPatients();
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="default">Agendar uma consulta</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8"
-          >
-            <DialogHeader>
-              <DialogTitle>Nova consulta</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
-              </DialogDescription>
-            </DialogHeader>
-
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="shadcn"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {isLoadingDoctors ? (
-              <Skeleton className="w-[100px] h-[20px] rounded-full" />
-            ) : (
-              <>
+    <div className="px-6 py-4 md:py-8 flex m-auto w-full md:w-fit">
+      <Card className="w-full md:w-[500px]">
+        <CardHeader>
+          <CardTitle>Nova consulta</CardTitle>
+          <CardDescription>
+            Deploy your new project in one-click.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form>
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Name of your project"
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="framework">Selecione o médico</Label>
                 <Select>
-                  <SelectTrigger className="w-fit">
-                    <SelectValue placeholder="Selecione o médico" />
+                  <SelectTrigger id="framework" className="h-fit flex">
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Médicos</SelectLabel>
+                  <SelectContent position="popper">
+                    {dataDoctors?.content.map(
+                      (doctor: DoctorType, index: number) => (
+                        <SelectItem
+                          key={index}
+                          value={doctor.id.toString()}
+                        >
+                          <div className="flex gap-2">
+                            <AvatarAPI />
 
-                      {dataDoctors?.content.map(
-                        (doctor: DoctorType, index: number) => (
-                          <SelectItem
-                            key={index}
-                            value={doctor.id.toString()}
-                          >
-                            {doctor.nome}
-                          </SelectItem>
-                        )
-                      )}
-                    </SelectGroup>
+                            <div className="flex flex-col items-start">
+                              <span>{doctor.nome}</span>
+                              <span className="text-muted-foreground">{doctor.especialidade}</span>
+                            </div>
+                          </div>
+                        </SelectItem>
+                      )
+                    )}
                   </SelectContent>
                 </Select>
-              </>
-            )}
-
-            {isLoadingPatients ? (
-              <Skeleton className="w-[100px] h-[20px] rounded-full" />
-            ) : (
-              <>
-                <Select>
-                  <SelectTrigger className="w-fit">
-                    <SelectValue placeholder="Selecione o paciente" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Pacientes</SelectLabel>
-
-                      {dataPatients?.content.map(
-                        (doctor: PatientsType, index: number) => (
-                          <SelectItem
-                            key={index}
-                            value={doctor.id.toString()}
-                          >
-                            {doctor.nome}
-                          </SelectItem>
-                        )
-                      )}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </>
-            )}
-
-            <DialogFooter>
-              <Button type="submit">Marcar consulta</Button>
-            </DialogFooter>
+              </div>
+            </div>
           </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline">Cancel</Button>
+          <Button>Deploy</Button>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

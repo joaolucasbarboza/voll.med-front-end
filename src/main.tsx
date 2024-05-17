@@ -11,6 +11,7 @@ import Medicines from "./pages/Medicines/index.tsx";
 import { Patients } from "./pages/Patients/index.tsx";
 import { Login } from "./pages/Login/index.tsx";
 import { Register } from "./pages/Register/index.tsx";
+import { NewQuey } from "./pages/NewQuery/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "patients",
         element: <Patients />,
+      },
+      {
+        path: "newquery",
+        element: <NewQuey />,
       },
     ],
   },
