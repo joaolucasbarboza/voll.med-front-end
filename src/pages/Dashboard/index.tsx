@@ -44,6 +44,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { NewQuery } from "@/components/new-query";
 
 export function Dashboard() {
   return (
@@ -63,7 +64,7 @@ export function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button>Marcar uma consulta agora mesmo</Button>
+              <NewQuery />
             </CardFooter>
           </Card>
           <Card
