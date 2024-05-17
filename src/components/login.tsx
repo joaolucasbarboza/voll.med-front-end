@@ -15,7 +15,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import { useSessionUserContext } from "@/contexts/auth";
 import { api } from "@/services/api";
 
 const LoginSchema = z.object({
@@ -45,15 +44,13 @@ export function LoginInputs() {
     
     api.post("/login", values)
     .then(response => {
+      localStorage.removeItem('token')
 
       const token = response.data.token;
 
-      console.log(token);
-      
-
       localStorage.setItem('token', token)
 
-      navigate("/dashboard")
+      navigate("/")
     })
     .catch((error) => console.error(error));
   }
