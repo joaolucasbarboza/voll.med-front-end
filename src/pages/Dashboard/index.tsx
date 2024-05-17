@@ -44,7 +44,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NewQuery } from "@/components/new-query";
+import { Link } from "react-router-dom";
 
 export function Dashboard() {
   return (
@@ -64,13 +64,12 @@ export function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <NewQuery />
+              <Link to={{ pathname: "/newquery" }}>
+                <Button>Nova consulta</Button>
+              </Link>
             </CardFooter>
           </Card>
-          <Card
-            x-chunk="dashboard-05-chunk-1 h-fit"
-            className="h-fit"
-          >
+          <Card x-chunk="dashboard-05-chunk-1 h-fit">
             <CardHeader className="pb-2">
               <CardDescription>Essa semana</CardDescription>
               <CardTitle className="text-4xl">36 consultas</CardTitle>
@@ -82,10 +81,7 @@ export function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card
-            x-chunk="dashboard-05-chunk-2"
-            className="h-fit"
-          >
+          <Card x-chunk="dashboard-05-chunk-2">
             <CardHeader className="pb-2">
               <CardDescription>Este mês</CardDescription>
               <CardTitle className="text-4xl">130 consultas</CardTitle>
