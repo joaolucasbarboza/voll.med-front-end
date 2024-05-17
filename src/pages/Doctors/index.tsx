@@ -1,35 +1,17 @@
-import { useEffect, useState } from "react";
-import { api } from "@/services/api";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
+import { useQueryDoctors } from "@/hooks/useQueryDoctors";
 
 function Doctors() {
-  const [responseData, setResponseData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const {dataDoctors, isLoading} = useQueryDoctors();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await api.get("/medicos");
+  if (isLoading) return <div>Carregando...</div>;
 
-        console.log(response.data.content);
-        
-        setResponseData(response.data.content);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div>Carregando...</div>;
+  if (!dataDoctors) return <div>Erro ao carregar dados.</div>;
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={responseData} />
+      <DataTable columns={columns} data={dataDoctors.content} />
     </div>
   );
 }
