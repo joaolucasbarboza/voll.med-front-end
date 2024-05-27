@@ -52,7 +52,7 @@ export function NewMedicine() {
                       <FormLabel>Descrição</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ex: ..."
+                          placeholder="Ex: Ibuprofeno"
                           {...field}
                         />
                       </FormControl>
@@ -70,7 +70,7 @@ export function NewMedicine() {
                       <FormLabel>Resumo médico</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ex: ..."
+                          placeholder="Ex: Ibuprofeno é um remédio..."
                           {...field}
                         />
                       </FormControl>

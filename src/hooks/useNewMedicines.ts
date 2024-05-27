@@ -27,7 +27,7 @@ export function useNewMedicines() {
       numero_registro: "",
       estoque: 0,
       dosagem: "",
-      tipo_remedio: "ANALGESICO",
+      tipo_remedio: "",
     },
   });
 
