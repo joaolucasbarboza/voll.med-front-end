@@ -13,6 +13,7 @@ import { Patients } from "./pages/Patients/index.tsx";
 import { Login } from "./pages/Login/index.tsx";
 import { Register } from "./pages/Register/index.tsx";
 import { NewQuey } from "./pages/NewQuery/index.tsx";
+import { NewMedicine } from "./pages/Medicines/new-medicine.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "medicines",
         element: <Medicines />,
+      },
+      {
+        path: "newmedicine",
+        element: <NewMedicine />
       },
       {
         path: "patients",
