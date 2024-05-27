@@ -32,6 +32,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "./data-table-pagination";
+import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -71,14 +73,25 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+        <div className="flex gap-2">
+          <div className="flex items-center border border-input rounded-lg pl-2">
+            <Search className="text-muted-foreground" />
+            <Input
+              placeholder="Pesquisar..."
+              value={
+                (table.getColumn("descricao")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("descricao")?.setFilterValue(event.target.value)
+              }
+              className="max-w-sm border-none focus-visible:ring-0"
+            />
+          </div>
+
+          <Link to={{ pathname: "/newmedicine" }}>
+            <Button>Adicionar medicamento</Button>
+          </Link>
+        </div>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -160,8 +173,6 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-
-      
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <DataTablePagination table={table} />

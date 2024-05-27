@@ -1,140 +1,142 @@
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown } from "lucide-react";
 import { DataTableColumnHeader } from "./data-table-column-header";
+import { Badge } from "@/components/ui/badge";
 
-export type DocstorsType = {
-  foto: object,
-  id: string,
-  descricao: string,
-  estoque: number,
-  numeroRegistro: string,
-  tipoRemedio: string,
-  dosagem: string
+export type MedicinesType = {
+  descricao: string;
+  resumoMedicamento: string;
+  numeroRegistro: string;
+  estoque: number;
+  dosagem: string;
+  tipoRemedio: string;
 };
 
-export const columns: ColumnDef<DocstorsType>[] = [
-
+export const columns: ColumnDef<MedicinesType>[] = [
   {
     accessorKey: "descricao",
     header: ({ column }) => {
-        <DataTableColumnHeader column={column} title="descricao" />
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Descrição
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      <DataTableColumnHeader
+        column={column}
+        title="descricao"
+      />;
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Descrição
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
-    accessorKey: "resumoMedico",
+    accessorKey: "resumoMedicamento",
     header: ({ column }) => {
-        <DataTableColumnHeader column={column} title="resumoMedico" />
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Resumo médico
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      <DataTableColumnHeader
+        column={column}
+        title="resumoMedicamento"
+      />;
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Resumo medicamento
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <p className="line-clamp-2">
+        {row.original.resumoMedicamento }
+      </p>
+    ),
   },
   {
     accessorKey: "tipoRemedio",
     header: ({ column }) => {
-        <DataTableColumnHeader column={column} title="tipoRemedio" />
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Tipo remedio
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      <DataTableColumnHeader
+        column={column}
+        title="tipoRemedio"
+      />;
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Tipo remedio
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "dosagem",
     header: ({ column }) => {
-        <DataTableColumnHeader column={column} title="dosagem" />
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            dosagem
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      <DataTableColumnHeader
+        column={column}
+        title="dosagem"
+      />;
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          dosagem
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
 
   {
     accessorKey: "estoque",
     header: ({ column }) => {
-        <DataTableColumnHeader column={column} title="estoque" />
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Estoque
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      <DataTableColumnHeader
+        column={column}
+        title="estoque"
+      />;
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Estoque
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <Badge
+        variant={"outline"}
+        className={`border text-white ${
+          row.original.estoque >= 20 ? "bg-green-600" : "bg-red-600"
+        }`}
+      >
+        {row.original.estoque}
+      </Badge>
+    ),
   },
 
   {
     accessorKey: "numeroRegistro",
     header: ({ column }) => {
-        <DataTableColumnHeader column={column} title="numeroRegistro" />
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Numero do registro
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
-  },
-
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const payment = row.original
- 
+      <DataTableColumnHeader
+        column={column}
+        title="numero_registro"
+      />;
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Numero do registro
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
     },
   },
 ];

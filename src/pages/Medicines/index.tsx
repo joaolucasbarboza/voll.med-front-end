@@ -1,35 +1,18 @@
-import { useEffect, useState } from "react";
-import { api } from "@/services/api";
+import { Loader } from "@/components/loader";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
+import { useQueryMedicines } from "@/hooks/useQueryMedicines";
 
 function Medicines() {
-  const [responseData, setResponseData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const {dataMedicines, isLoadingDoctors} = useQueryMedicines();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await api.get("/remedios");
+  if (isLoadingDoctors) return <Loader />;
 
-        console.log(response.data.content);
-        
-        setResponseData(response.data.content);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div>Carregando...</div>;
-
+  if (!dataMedicines) return <div className="m-auto h-screen">Erro ao carregar dados.</div>;
+  
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={responseData} />
+    <div className="container mx-auto">
+      <DataTable columns={columns} data={dataMedicines.content} />
     </div>
   );
 }
