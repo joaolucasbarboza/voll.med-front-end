@@ -18,8 +18,8 @@ export function useQueryDoctors() {
   const [dataDoctors, setDataDoctors] = useState<DoctorsResponse | null>(null);
   const [isLoadingDoctors, setIsLoading] = useState(true);
 
-  function fetchData() {
-    api
+  async function fetchData() {
+    await api
       .get("/medicos")
       .then((response) => {
 
