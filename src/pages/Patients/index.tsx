@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/services/api";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
+import { Loader } from "@/components/loader";
 
 export function Patients() {
   const [responseData, setResponseData] = useState([]);
@@ -25,7 +26,7 @@ export function Patients() {
     fetchData();
   }, []);
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <Loader />;
 
   return (
     <div className="container mx-auto">

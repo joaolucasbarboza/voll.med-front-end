@@ -1,3 +1,4 @@
+import { Loader } from "@/components/loader";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { useQueryDoctors } from "@/hooks/useQueryDoctors";
@@ -5,7 +6,7 @@ import { useQueryDoctors } from "@/hooks/useQueryDoctors";
 function Doctors() {
   const {dataDoctors, isLoadingDoctors } = useQueryDoctors();
 
-  if (isLoadingDoctors) return <div>Carregando...</div>;
+  if (isLoadingDoctors) return <Loader />;
 
   if (!dataDoctors) return <div>Erro ao carregar dados.</div>;
 
