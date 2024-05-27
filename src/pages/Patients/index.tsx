@@ -28,7 +28,7 @@ export function Patients() {
   if (loading) return <div>Carregando...</div>;
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto">
       <DataTable columns={columns} data={responseData} />
     </div>
   );
