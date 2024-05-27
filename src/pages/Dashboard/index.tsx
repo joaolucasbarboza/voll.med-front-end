@@ -50,25 +50,24 @@ export function Dashboard() {
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-          <Card
-            className="sm:col-span-2"
-            x-chunk="dashboard-05-chunk-0"
-          >
-            <CardHeader className="pb-3">
-              <CardTitle>Deseja marcar uma consulta?</CardTitle>
-              <CardDescription className="max-w-lg text-balance leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-                unde fuga similique adipisci dignissimos? Eum repudiandae ipsam
-                ipsum.
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Link to={{ pathname: "/newquery" }}>
-                <Button>Nova consulta</Button>
-              </Link>
-            </CardFooter>
-          </Card>
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+
+          <Link to={{ pathname: "/newquery" }}>
+            <Card
+              className="sm:col-span-2 h-full flex items-center pb-0"
+              x-chunk="dashboard-05-chunk-0"
+            >
+              <CardHeader className="pb-3">
+                <div className="flex items-center">
+                <CardTitle className="text-4xl">
+                  Nova consulta
+                </CardTitle>
+                <ChevronRight size={30} className="text-muted-foreground" />
+                </div>
+              </CardHeader>
+            </Card>
+          </Link>
+
           <Card x-chunk="dashboard-05-chunk-1 h-fit">
             <CardHeader className="pb-2">
               <CardDescription>Essa semana</CardDescription>
