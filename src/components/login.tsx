@@ -27,7 +27,7 @@ const LoginSchema = z.object({
 });
 
 export function LoginInputs() {
-  const [isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -42,15 +42,20 @@ export function LoginInputs() {
   function onSubmit(values: z.infer<typeof LoginSchema>) {
     console.log(values);
     
+    localStorage.removeItem('token')
+
+    setIsLoading(true);
+    
     api.post("/login", values)
     .then(response => {
-      localStorage.removeItem('token')
 
       const token = response.data.token;
 
       localStorage.setItem('token', token)
 
       navigate("/")
+
+      setIsLoading(false);
     })
     .catch((error) => console.error(error));
   }
@@ -108,7 +113,7 @@ export function LoginInputs() {
 
               {isLoading ? (
                 <ButtonLoading
-                  className="mt-6"
+                  className="mt-6 w-full"
                   text="Entrando"
                 />
               ) : (
