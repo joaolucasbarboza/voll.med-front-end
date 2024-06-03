@@ -1,4 +1,4 @@
-import { NewQuery } from "@/components/new-query"
+import { NewQuery } from "@/components/NewQuery"
 
 export function NewQuey() {
   return (

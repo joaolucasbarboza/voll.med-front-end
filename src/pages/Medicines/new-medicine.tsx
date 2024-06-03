@@ -31,8 +31,8 @@ export function NewMedicine() {
   const { form, onSubmit, isLoading } = useNewMedicines();
 
   return (
-    <div className="px-6 py-4 flex m-auto w-full md:w-fit">
-      <Card className="w-full md:w-[1024px]">
+    <div className="px-0 flex m-auto w-full md:w-fit">
+      <Card className="w-full md:w-[1024px] border-none shadow-none">
         <CardHeader>
           <CardTitle className="text-xl">Novo medicamento</CardTitle>
           <CardDescription>Cadastro de um novo medicamento.</CardDescription>
@@ -209,9 +209,9 @@ export function NewMedicine() {
               </div>
 
               {isLoading ? (
-                <ButtonLoading text="Carregando" />
+                <ButtonLoading className="w-full sm:w-fit" text="Carregando" />
               ) : (
-                <Button type="submit">Cadastrar remédio</Button>
+                <Button type="submit" className="w-full sm:w-fit">Cadastrar remédio</Button>
               )}
             </form>
           </Form>
